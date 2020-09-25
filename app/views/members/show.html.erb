@@ -1,0 +1,45 @@
+<div>
+	<h2>マイページ</h2>
+</div>
+
+
+<div>
+	<h3>登録情報</h3>
+	<%= link_to "　編集する　", edit_member_path(current_member), class: "btn btn-primary" %>
+	<%= link_to "　パスワードを変更する　", edit_member_registration_path, class: "btn btn-primary" %>
+	<%= link_to "　ログアウト　", destroy_member_session_path, method: :delete, class: "btn btn-danger" %>
+</div>
+
+<!-- 会員情報一覧 -->
+<div>
+	<table class="table table-bordered">
+		<tbody>
+			<tr>
+				<td class="action">名前 or ニックネーム</td>
+				<td><%= @member.name %></td>
+			</tr>
+			<tr>
+				<td class="action">メールアドレス</td>
+				<td><%= @member.email %></td>
+			</tr>
+			<tr>
+				<td class="action">性別</td>
+				<td><%= @member.sex_i18n %></td>
+			</tr>
+			<tr>
+				<td class="action">年齢</td>
+				<td><%= @member.age_i18n %></td>
+			</tr>
+			<tr>
+				<td class="action">お住まいの地域</td>
+				<td><%#= @member.address %></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- 会員情報一覧ここまで -->
+
+<div>
+	<h3>投稿内容</h3>
+
+</div>
