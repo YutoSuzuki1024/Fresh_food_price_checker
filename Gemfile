@@ -72,9 +72,12 @@ gem 'ransack'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
-gem 'dotenv-rails'
 gem 'rubocop'
 gem 'rubocop-rails'
 gem 'rspec-rails'
 gem 'rails-i18n'
 gem 'enum_help'
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
