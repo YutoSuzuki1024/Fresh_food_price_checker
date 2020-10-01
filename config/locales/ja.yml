@@ -15,3 +15,9 @@ ja:
         sixties: "60代"
         seventies: "70代"
         eighties: "80代～"
+
+    post:
+      price_status:
+        market_price: "相場価格"
+        sale_price: "特売日価格"
+

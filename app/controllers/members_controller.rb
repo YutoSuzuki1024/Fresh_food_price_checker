@@ -2,8 +2,8 @@ class MembersController < ApplicationController
 	before_action :authenticate_member!
 
   def show
-    binding.pry
     @member = Member.find(params[:id])
+    @area = Area.find(@member.area_id)
   end
 
   def edit
@@ -35,6 +35,6 @@ class MembersController < ApplicationController
 
   private
   def member_params
-    params.require(:member).permit(:name, :email, :sex, :age, :address)
+    params.require(:member).permit(:name, :email, :sex, :age, :area_id)
   end
 end

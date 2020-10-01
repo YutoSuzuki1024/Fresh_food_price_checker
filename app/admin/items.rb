@@ -1,6 +1,6 @@
 ActiveAdmin.register Item do
   #各種パラメータの入力を許可
-  permit_params :genre_id, :image_id, :name, :area,
+  permit_params :genre_id, :item_image, :name, :area,
     relationship_item_areas_attributes: [ :id, :area_id ]
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -20,7 +20,7 @@ ActiveAdmin.register Item do
 
   form do |f|
     f.inputs do
-      f.input :image_id, as: :file
+      f.input :item_image, as: :file
       f.input :genre_id, as: :select, collection: Genre.all
       f.input :name
     end

@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_203558) do
   create_table "items", force: :cascade do |t|
     t.integer "genre_id"
     t.string "name"
-    t.string "image_id"
+    t.string "item_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -95,7 +95,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_203558) do
   create_table "posts", force: :cascade do |t|
     t.integer "member_id"
     t.integer "item_id"
-    t.integer "area_id"
     t.integer "price_status", default: 1
     t.integer "price"
     t.string "shop_name"

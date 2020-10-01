@@ -1,24 +1,40 @@
-# README
+# 新生活応援！生鮮食品相場チェッカー
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+このサイトは全国各地域ごとの生鮮食品の相場について検索ができるサイトです。各ユーザーの口コミを基に生鮮食品の相場を算出します。
+新社会人、転勤族向けのサイトとなるため、取り扱う生鮮食品は主要なものに限っています。
+基本機能は地域別の相場価格・利用店舗の新規投稿、相場価格の検索です。
+また平時の相場価格とは別途特売日価格も登録・検索することが可能です。
 
-Things you may want to cover:
+### サイトテーマ
+新生活が始まったばかりでドタバタの社会人を、金銭面から少しでもサポートする
 
-* Ruby version
+### テーマを選んだ理由
+DMM WEBCAMP講座の受講にあたり、当サイト製作者自身も初めて東京に移り住みました。
+近所のスーパーに立ち寄ると、そこでの販売価格が地元とあまりにも異なり、その価格が東京の相場価格なのか、
+たまたまそのスーパーが高いだけなのか、戸惑うことが多くありました。
+そこで相場が一目で分かるサイトがあれば、私と同じような支出を抑えたい新社会人・転勤族の手助けになるのではないかと思い、このテーマを選びました。
 
-* System dependencies
+生鮮食品をターゲットとした理由は以下の2点です。
+- 生鮮食品の主な購入先が、通販ではなく実店舗となっていること
+- Amazonや楽天等の主要通販サイトで生鮮食品を購入するのは難しく、結果として通販サイトを検索しても相場を導き出せないこと
 
-* Configuration
+### ターゲットユーザ
+投稿者→その地域在住の主婦、社会人
+検索利用者→新社会人、転勤族などの新生活者
 
-* Database creation
+### 主な利用シーン
+新生活が始まったばかりの社会人が、その地域の生鮮食品相場価格を調べ、相場を把握、その上でより有意義な商品の購入ができるよう利用する
+（相場より安いスーパーを探す、高いスーパーでの買い物が避けられるようになる等）
 
-* Database initialization
+## 設計書
 
-* How to run the test suite
+### 機能一覧
+https://docs.google.com/spreadsheets/d/1tnQjAM-KtRBCnq73mRGOvsfgR509TEuPZYA_99PcIVA/edit?usp=sharing
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Bootstrap,Ruby on Rails
+- JSライブラリ：jQuery
+- 仮想環境：Vagrant,VirtualBox

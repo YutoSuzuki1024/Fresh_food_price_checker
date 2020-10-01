@@ -1,0 +1,56 @@
+<div>サイドバー</div>
+
+<div>
+	<%= image_tag @item.item_image.detail.url %>
+</div>
+
+<div>
+	<h3><%= @item.name %></h3>
+	<h3>相場価格</h3>
+	<% if @market_price_average == nil %>
+		<span>¥　－</span>
+	<% else %>
+		<span>¥　<%= @market_price_average.round %></span>
+	<% end %>
+
+	<h3>特売日価格</h3>
+	<% if @sale_price_average == nil %>
+		<span>¥　－</span>
+	<% else %>
+		<span>¥　<%= @sale_price_average.round %></span>
+	<% end %>
+</div>
+
+<div>
+	<p>一番相場価格がお得な店舗　<%= @market_price_minimum.shop_name %></p>
+	<p>一番特売日価格がお得な店舗　<%= @sale_price_minimum.shop_name %></p>
+</div>
+
+<div>
+	<h4>あなたも口コミを投稿してみませんか？</h4>
+	<%= link_to "　投稿する　", posts_new_path(:member_id => current_member.id, :item_id => @item.id), class: "btn btn-primary" %>
+</div>
+
+<div>
+	<h3>みんなの口コミ</h3>
+	<table class="table table-bordered">
+		<tbody>
+			<% @posts.each do |post| %>
+				<tr>
+					<td><%= post.price_status_i18n %></td>
+					<td>¥　<%= post.price %></td>
+					<td>
+						<%= post.comment %><br>
+						主な利用店舗：　<%= post.shop_name %>
+					</td>
+					<td>
+						<%= @member.age_i18n %>
+						<%= @member.sex_i18n %>
+					</td>
+					<td>いいねボタン</td>
+					<td><%= link_to "　詳細をみる　", posts_show_path(:member_id => @member, :id => post.id), class: "btn btn-primary" %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

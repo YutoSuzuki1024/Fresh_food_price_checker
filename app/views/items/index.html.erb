@@ -1,0 +1,129 @@
+<div>サイドバー</div>
+<div>
+	<h2><%= @area.name %>の生鮮食品一覧</h2>
+	<h3>＜野菜＞</h3>
+</div>
+
+<div>
+	<% @vegetables.each do |vegetable| %>
+		<%= image_tag vegetable.item_image.url %>
+		<%= vegetable.name %>
+
+		<!-- 口コミから野菜の相場価格・特売日価格の平均値をそれぞれ算出 -->
+		<p>
+			相場価格
+			<% if vegetable.posts.where(price_status: 1).average(:price) == nil %>
+				¥　－
+			<% else %>
+				¥　<%= vegetable.posts.where(price_status: 1).average(:price).round %>
+			<% end %>
+		</p>
+		<p>
+			特売日価格
+			<% if vegetable.posts.where(price_status: 0).average(:price) == nil %>
+				¥　－
+			<% else %>
+				¥　<%= vegetable.posts.where(price_status: 0).average(:price).round %>
+			<% end %>
+		</p>
+		<!-- 平均値ここまで -->
+
+		<%= link_to "　口コミを見る　", item_path(vegetable), class: "btn btn-primary" %>
+	<% end %>
+</div>
+
+<div>
+	<h3>＜果物＞</h3>
+</div>
+
+<div>
+	<% @fruits.each do |fruit| %>
+		<%= image_tag fruit.item_image.url %>
+		<%= fruit.name %>
+
+		<!-- 口コミから果物の相場価格・特売日価格の平均値をそれぞれ算出 -->
+		<p>
+			相場価格
+			<% if fruit.posts.where(price_status: 1).average(:price) == nil %>
+				¥　－
+			<% else %>
+				¥　<%= fruit.posts.where(price_status: 1).average(:price).round %>
+			<% end %>
+		</p>
+		<p>
+			特売日価格
+			<% if fruit.posts.where(price_status: 0).average(:price) == nil %>
+				¥　－
+			<% else %>
+				¥　<%= fruit.posts.where(price_status: 0).average(:price).round %>
+			<% end %>
+		</p>
+		<!-- 平均値ここまで -->
+
+		<%= link_to "　口コミを見る　", item_path(fruit), class: "btn btn-primary" %>
+	<% end %>
+</div>
+
+<div>
+	<h3>＜魚介類＞</h3>
+</div>
+
+<div>
+	<% @seafoods.each do |seafood| %>
+		<%= image_tag seafood.item_image.url %>
+		<%= seafood.name %>
+
+		<!-- 口コミから魚介類の相場価格・特売日価格の平均値をそれぞれ算出 -->
+		<p>
+			相場価格
+			<% if seafood.posts.where(price_status: 1).average(:price) == nil %>
+				¥　－
+			<% else %>
+				¥　<%= seafood.posts.where(price_status: 1).average(:price).round %>
+			<% end %>
+		</p>
+		<p>
+			特売日価格
+			<% if seafood.posts.where(price_status: 0).average(:price) == nil %>
+				¥　－
+			<% else %>
+				¥　<%= seafood.posts.where(price_status: 0).average(:price).round %>
+			<% end %>
+		</p>
+		<!-- 平均値ここまで -->
+
+		<%= link_to "　口コミを見る　", item_path(seafood), class: "btn btn-primary" %>
+	<% end %>
+</div>
+
+<div>
+	<h3>＜肉類＞</h3>
+</div>
+
+<div>
+	<% @meats.each do |meat| %>
+		<%= image_tag meat.item_image.url %>
+		<%= meat.name %>
+
+		<!-- 口コミから肉類の相場価格・特売日価格の平均値をそれぞれ算出 -->
+		<p>
+			相場価格
+			<% if meat.posts.where(price_status: 1).average(:price) == nil %>
+				¥　－
+			<% else %>
+				¥　<%= meat.posts.where(price_status: 1).average(:price).round %>
+			<% end %>
+		</p>
+		<p>
+			特売日価格
+			<% if meat.posts.where(price_status: 0).average(:price) == nil %>
+				¥　－
+			<% else %>
+				¥　<%= meat.posts.where(price_status: 0).average(:price).round %>
+			<% end %>
+		</p>
+		<!-- 平均値ここまで -->
+
+		<%= link_to "　口コミを見る　", item_path(meat), class: "btn btn-primary" %>
+	<% end %>
+</div>

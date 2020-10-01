@@ -70,8 +70,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
-gem 'refile', require: 'refile/rails', github: 'manfe/refile'
-gem 'refile-mini_magick'
+
+#active-adminにて画像アップロードをするため、refileの代わりに採用
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick'
+
 gem 'pry-rails'
 gem 'activeadmin'
 gem 'ransack'
@@ -87,3 +90,7 @@ gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+
+#Capistranoを実行に伴うエラー解消
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
