@@ -3,9 +3,7 @@ class ItemsController < ApplicationController
 
   def index
   	# ユーザーに選択された地域に登録されている食品一覧を出す
-  	# whereメソッドで地域絞り込みがかけられるよう、地域との中間テーブルと関連づけ
-  	Item.left_joins(:relationship_item_areas)
-  	@items = Item.left_joins(:relationship_item_areas).where( :relationship_item_areas => {:area_id => params[:area_id]} )
+    @items = Item.where(area_id: params[:area_id])
   	@vegetables = @items.where(genre_id: 1)
   	@fruits = @items.where(genre_id: 2)
   	@seafoods = @items.where(genre_id: 3)

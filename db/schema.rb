@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_234822) do
   end
 
   create_table "items", force: :cascade do |t|
+    t.integer "area_id"
     t.integer "genre_id"
     t.string "name"
     t.string "item_image"
@@ -101,15 +102,6 @@ ActiveRecord::Schema.define(version: 2020_10_01_234822) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "relationship_item_areas", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "area_id", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_relationship_item_areas_on_area_id"
-    t.index ["item_id"], name: "index_relationship_item_areas_on_item_id"
   end
 
 end
