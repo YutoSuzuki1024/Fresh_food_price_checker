@@ -4,10 +4,20 @@ class MembersController < ApplicationController
   def show
     @member = Member.find(params[:id])
     @area = Area.find(@member.area_id)
+
+    #アクセス制限
+    if current_member.id != @member.id
+      redirect_to root_path
+    end
   end
 
   def edit
     @member = Member.find(params[:id])
+
+    #アクセス制限
+    if current_member.id != @member.id
+      redirect_to root_path
+    end
   end
 
   def update
@@ -19,8 +29,6 @@ class MembersController < ApplicationController
       render "edit"
     end
   end
-
-
 
   def leave
   end

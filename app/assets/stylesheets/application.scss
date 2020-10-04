@@ -15,3 +15,13 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+/*アバウトページ*/
+.about_img {
+	width: 800px;
+	height: 600px;
+	background-image: url("supermarket.jpg");
+	background-size: cover;
+	background-position: center;
+}

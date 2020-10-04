@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
 	#ログアウト後、トップページへ(会員トップ、管理者トップそれぞれ場合分け)
 	def after_sign_out_path_for(resource)
 		case resource
-		when Member
-			new_member_session_path
+		when :member
+			root_path
 		else
 			admin_root_path
 		end

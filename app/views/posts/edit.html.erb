@@ -1,2 +1,32 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<div>
+	<h3>口コミ編集</h3>
+</div>
+
+<div>
+	<%= image_tag @item.item_image.url %>
+</div>
+
+<div>
+	<h4><%= @item.name %></h4>
+</div>
+
+<!-- 編集内容 -->
+<%= form_with(model: @post, url: posts_update_path(:member_id => current_member, :item_id => @item.id, :id => @post.id), method: :patch, local: true) do |f| %>
+	<div class="field form-group">
+		<%= f.collection_radio_buttons :price_status, Post.price_statuses_i18n, :first, :last %>
+		<%= f.label :price, "価格（半角数字で入力）" %>
+		<%= f.text_field :price %>　円
+	</div>
+
+	<div>
+		<%= f.label :shop_name, "主な利用店舗名（例：スーパー〇〇　××店）" %>
+		<%= f.text_field :shop_name %>
+		<%= f.label :comment, "コメント（例：「いつもと比べて少し高くなったかも、、、」　「●月☆日から特売日だそうです！」）" %>
+		<%= f.text_area :comment %>
+	</div>
+
+	<div>
+		<%= f.submit "　編集する　", data: { confirm: "編集してもよろしいですか？" } %>
+	</div>
+<% end %>
+<!-- 編集内容ここまで -->

@@ -1,4 +1,18 @@
-<div>サイドバー</div>
+<!-- サイドバー -->
+<div>
+	<h3>他の地域も見てみる！</h3>
+
+	<ul class="list-group">
+		<% @areas.each do |area| %>
+			<li class="list-group-item">
+				<%= link_to items_path(:area_id => area.id) do %>
+					<%= area.name %>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
+</div>
+<!-- サイドバーここまで -->
 
 <div>
 	<%= image_tag @item.item_image.detail.url %>
@@ -22,8 +36,23 @@
 </div>
 
 <div>
-	<p>一番相場価格がお得な店舗　<%= @market_price_minimum.shop_name %></p>
-	<p>一番特売日価格がお得な店舗　<%= @sale_price_minimum.shop_name %></p>
+	<p>
+		一番相場価格がお得な店舗　
+		<% if @market_price_minimum == nil %>
+			ー
+		<% else %>
+			<%= @market_price_minimum.shop_name %>
+		<% end %>
+	</p>
+
+	<p>
+		一番特売日価格がお得な店舗　
+		<% if @sale_price_minimum == nil %>
+			ー
+		<% else %>
+			<%= @sale_price_minimum.shop_name %>
+		<% end %>
+	</p>
 </div>
 
 <div>
@@ -34,9 +63,21 @@
 <div>
 	<h3>みんなの口コミ</h3>
 	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>投稿日時</th>
+				<th>価格ステータス</th>
+				<th>価格</th>
+				<th>コメント</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
 		<tbody>
 			<% @posts.each do |post| %>
 				<tr>
+					<td><%= post.updated_at.to_s(:datetime_jp) %></td>
 					<td><%= post.price_status_i18n %></td>
 					<td>¥　<%= post.price %></td>
 					<td>
@@ -48,7 +89,7 @@
 						<%= @member.sex_i18n %>
 					</td>
 					<td>いいねボタン</td>
-					<td><%= link_to "　詳細をみる　", posts_show_path(:member_id => @member, :id => post.id), class: "btn btn-primary" %></td>
+					<td><%= link_to "　詳細をみる　", posts_show_path(:member_id => @member, :item_id => @item, :id => post.id), class: "btn btn-primary" %></td>
 				</tr>
 			<% end %>
 		</tbody>

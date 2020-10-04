@@ -8,8 +8,24 @@
 
 <div>
 	<h4><%= @item.name %></h4>
-	<h4>現在の相場価格</h4>
-	<h4>現在の特売日価格</h4>
+	<!-- 価格の平均額表示 -->
+	<h4>
+		現在の相場価格　
+		<% if @market_price_average == nil %>
+			<span>¥　－</span>
+		<% else %>
+			<span>¥　<%= @market_price_average.round %></span>
+		<% end %>
+	</h4>
+	<h4>
+		現在の特売日価格　
+		<% if @sale_price_average == nil %>
+			<span>¥　－</span>
+		<% else %>
+			<span>¥　<%= @sale_price_average.round %></span>
+		<% end %>
+	</h4>
+	<!-- 価格の平均額表示ここまで -->
 </div>
 
 <!-- 新規投稿内容 -->

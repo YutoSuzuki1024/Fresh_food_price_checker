@@ -18,10 +18,13 @@ Rails.application.routes.draw do
   post "members/:member_id/items/:item_id/posts" => "posts#create", as: :posts_create
   get "members/:member_id/items/:item_id/posts/new" => "posts#new", as: :posts_new
   get "members/:member_id/items/:item_id/posts/:id/edit" => "posts#edit", as: :posts_edit
-  get "members/:member_id/posts/:id" => "posts#show", as: :posts_show
+  get "members/:member_id/items/:item_id/posts/:id" => "posts#show", as: :posts_show
   patch "members/:member_id/items/:item_id/posts/:id" => "posts#update", as: :posts_update
-  delete "members/:member_id/items/:item_id/posts/:id" => "posts#destroy", as: :posts_destroy
+  delete "posts/:id" => "posts#destroy", as: :posts_destroy
   post "members/:member_id/items/:item_id/posts/new_confirm" => "posts#new_confirm", as: :posts_new_confirm
-  post "members/:member_id/items/:item_id/posts/:id/edit_confirm" => "posts#edit_confirm", as: :posts_edit_confirm
 
+  #お問い合わせに関するルーティング
+  get "inquiries/complete" => "inquiries#complete", as: :inquiries_complete
+  resources :inquiries
+  post "inquiries/confirm" => "inquiries#confirm", as: :inquiries_confirm
 end

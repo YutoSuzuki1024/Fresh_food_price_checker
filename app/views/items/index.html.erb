@@ -1,4 +1,19 @@
-<div>サイドバー</div>
+<!-- サイドバー -->
+<div>
+	<h3>他の地域も見てみる！</h3>
+
+	<ul class="list-group">
+		<% @areas.each do |area| %>
+			<li class="list-group-item">
+				<%= link_to items_path(:area_id => area.id) do %>
+					<%= area.name %>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
+</div>
+<!-- サイドバーここまで -->
+
 <div>
 	<h2><%= @area.name %>の生鮮食品一覧</h2>
 	<h3>＜野菜＞</h3>

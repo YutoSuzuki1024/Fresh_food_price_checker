@@ -94,3 +94,6 @@ end
 #Capistranoを実行に伴うエラー解消
 gem 'ed25519'
 gem 'bcrypt_pbkdf'
+
+#Google Mapにおいて、店舗名から経度・緯度取得
+gem 'geocoder'

@@ -12,12 +12,14 @@ class ItemsController < ApplicationController
   	@meats = @items.where(genre_id: 4)
 
   	@area = Area.find(params[:area_id])
+  	@areas = Area.where(is_deleted: false)
   end
 
   def show
   	@item = Item.find(params[:id])
-  	@posts = Post.where(item_id: params[:id])
+  	@posts = Post.where(item_id: params[:id]).order(updated_at: "DESC")
   	@member = Member.find(current_member.id)
+  	@areas = Area.where(is_deleted: false)
 
   	#口コミから、相場価格と特売日価格の平均値をそれぞれ算出
   	@market_price_average = Post.where(price_status: 1, item_id: params[:id]).average(:price)

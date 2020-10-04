@@ -1,13 +1,34 @@
 class PostsController < ApplicationController
+  before_action :authenticate_member!
+
   def index
+    @posts = Post.where(member_id: current_member.id).order(updated_at: "DESC")
+    @member = Member.find(params[:member_id])
+
+    #アクセス制限
+    if current_member.id != @member.id
+      redirect_to root_path
+    end
   end
 
   def new
     @item = Item.find(params[:item_id])
+
+    #口コミから、相場価格と特売日価格の平均値をそれぞれ算出
+    @market_price_average = Post.where(price_status: 1, item_id: params[:item_id]).average(:price)
+    @sale_price_average = Post.where(price_status: 0, item_id: params[:item_id]).average(:price)
+  end
+
+  def new_confirm
+    @item = Item.find(params[:item_id])
+    @post = Post.new
+    @post.price_status = params[:price_status]
+    @post.price = params[:price]
+    @post.shop_name = params[:shop_name]
+    @post.comment = params[:comment]
   end
 
   def create
-    binding.pry
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     @post.item_id = params[:item_id]
@@ -20,22 +41,47 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:item_id])
+    @post = Post.find(params[:id])
+    @member = Member.find(params[:member_id])
+    #アクセス制限
+    if current_member.id != @member.id
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @post.member_id = params[:member_id]
+    @post.item_id = params[:item_id]
+
+    if @post.update(post_params)
+      flash[:success] = "編集が完了しました！"
+      redirect_to posts_index_path(current_member.id)
+    else
+      render 'posts/edit'
+    end
   end
 
   def show
-  end
-
-  def new_confirm
-    binding.pry
+    @post = Post.find(params[:id])
+    @member = Member.find(params[:member_id])
     @item = Item.find(params[:item_id])
-    @post = Post.new
-    @post.price_status = params[:price_status]
-    @post.price = params[:price]
-    @post.shop_name = params[:shop_name]
-    @post.comment = params[:comment]
+
+    #アクセス制限
+    if current_member.id != @member.id
+      redirect_to root_path
+    end
   end
 
-  def edit_confirm
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:notice] = "口コミを削除しました。"
+      redirect_to posts_index_path(current_member.id)
+    else
+      render 'posts/index'
+    end
   end
 
   private
