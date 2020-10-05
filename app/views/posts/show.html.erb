@@ -39,7 +39,7 @@
 	</table>
 </div>
 
-
+<!-- 地図表示 -->
 <div>
 	<p>主な利用店舗　地図</p>
 </div>
@@ -48,24 +48,24 @@
 
 <style>
 	#map{
-		height: 600px;
-		width: 800px;
+		height: 350px;
+		width: 600px;
 	}
 </style>
 
 <script type="text/javascript">
-	let map;
-	let service;
-	let infowindow;
+	var map;
+	var service;
+	var infowindow;
 
 	function initMap() {
-	  const sydney = new google.maps.LatLng(-33.867, 151.195);
+	  var sydney = new google.maps.LatLng(-33.867, 151.195);
 	  infowindow = new google.maps.InfoWindow();
 	  map = new google.maps.Map(document.getElementById("map"), {
 	    center: sydney,
 	    zoom: 15,
 	  });
-	  const request = {
+	  var request = {
 	    query: "<%= @post.shop_name %>",
 	    fields: ["name", "geometry"],
 	  };
@@ -81,7 +81,7 @@
 	}
 
 	function createMarker(place) {
-	  const marker = new google.maps.Marker({
+	  var marker = new google.maps.Marker({
 	    map,
 	    position: place.geometry.location,
 	  });
@@ -94,4 +94,8 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&libraries=places&callback=initMap">
 </script>
+<!-- 地図表示ここまで -->
 
+<div>
+	<%= link_to "商品ページに戻る", item_path(@item), class: "btn btn-success" %>
+</div>

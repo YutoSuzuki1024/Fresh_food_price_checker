@@ -20,7 +20,7 @@
 		<tbody>
 			<tr>
 				<td>
-					<%= image_tag @item.item_image.url %>
+					<%= image_tag @item.item_image.confirm.url %>
 					<%= @item.name %>
 				</td>
 
@@ -47,11 +47,62 @@
 </div>
 
 
-
+<!-- 地図表示 -->
 <div>
 	主な利用店舗　地図
 </div>
 
+<div id="map"></div>
+
+<style>
+	#map{
+		height: 350px;
+		width: 600px;
+	}
+</style>
+
+<script type="text/javascript">
+	var map;
+	var service;
+	var infowindow;
+
+	function initMap() {
+	  var sydney = new google.maps.LatLng(-33.867, 151.195);
+	  infowindow = new google.maps.InfoWindow();
+	  map = new google.maps.Map(document.getElementById("map"), {
+	    center: sydney,
+	    zoom: 15,
+	  });
+	  var request = {
+	    query: "<%= @post.shop_name %>",
+	    fields: ["name", "geometry"],
+	  };
+	  service = new google.maps.places.PlacesService(map);
+	  service.findPlaceFromQuery(request, (results, status) => {
+	    if (status === google.maps.places.PlacesServiceStatus.OK) {
+	      for (let i = 0; i < results.length; i++) {
+	        createMarker(results[i]);
+	      }
+	      map.setCenter(results[0].geometry.location);
+	    }
+	  });
+	}
+
+	function createMarker(place) {
+	  var marker = new google.maps.Marker({
+	    map,
+	    position: place.geometry.location,
+	  });
+	  google.maps.event.addListener(marker, "click", () => {
+	    infowindow.setContent(place.name);
+	    infowindow.open(map);
+	  });
+	}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&libraries=places&callback=initMap">
+</script>
+<!-- 地図表示ここまで -->
 
 <div>
 	<!-- 新規投稿内容 -->
