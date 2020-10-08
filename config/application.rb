@@ -21,5 +21,9 @@ module FreshFoodPriceChecker
 
     #日本時間対応
     config.time_zone = "Tokyo"
+
+    #active_adminのデザイン、メンバーページへの干渉防止
+    config.assets.paths << config.root.join("vendor/assets/javascripts")
+    config.assets.paths << config.root.join("vendor/assets/stylesheets")
   end
 end

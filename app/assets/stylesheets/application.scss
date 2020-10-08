@@ -16,6 +16,17 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/*ヘッダー、フッターの固定、ボディのスクロール*/
+.all_container {
+	/* Flexbox コンテナの高さをブラウザの高さにする */
+	height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+
 /*ヘッダー*/
 header {
 	background-color: #FFF9DA;
@@ -31,9 +42,14 @@ header {
 .header_logo {
 	width: 200px;
 	height: 80px;
+	display: block;
 	background-image: url("logo.jpg");
 	background-size: cover;
 	background-position: center;
+}
+
+.header_logo span {
+	visibility: hidden;
 }
 
 .header_list {
@@ -56,10 +72,19 @@ footer {
 
 
 /*アバウトページ*/
-.about_title, .about_body {
+.about_title_area, .about_body_area {
 	text-align: center;
 }
 
+.about_title_text {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.underline {
+	background: url("wave-red.png") bottom repeat-x;
+  background-size: 25px;
+}
 
 .about_img {
 	margin: 0 auto;
@@ -68,4 +93,291 @@ footer {
 	background-image: url("gutspose.png");
 	background-size: 100% 100%;
 	background-position: center;
+}
+
+/*新規会員登録ページ*/
+form input[type=text], form input[type=email], form input[type=password] {
+	width: 50%;
+}
+
+.registration_new_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+/*ログインページ*/
+.session_new_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.session_new_link {
+	margin-left: 210px;
+}
+
+/*お問い合わせページ*/
+.inquiry_new_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+/*お問い合わせ確認ページ*/
+.inquiry_confirm_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.inquiry_confirm_table {
+	table-layout: fixed;
+	width: 600px;
+}
+
+.inquiry_confirm_table td {
+	word-wrap: break-word;
+}
+
+/*お問い合わせ完了ページ*/
+.inquiry_complete_area {
+	text-align: center;
+}
+
+.inquiry_complete_text {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+/*トップページ*/
+.top_image_area {
+	position: relative;
+	text-align: center;
+}
+
+.top_image_area h2 {
+	position: absolute;
+	color: white;
+	font-weight: bold;
+	background-color: rgba(169,169,169,0.5);
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	margin: 0;
+	padding: 5px 10px;
+	width: 900px;
+}
+
+.top_member_button_area {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: rgba(255,204,153,0.5);
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.top_area_button_area {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: rgba(255,204,153,0.5);
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.top_item_image_area {
+	display: flex;
+	justify-content: space-around;
+}
+
+/*マイページ*/
+.member_show_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.member_show_table {
+	table-layout: fixed;
+	width: 600px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+/*会員情報編集ページ*/
+.member_edit_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+/*会員退会ページ*/
+.member_leave_area {
+	text-align: center;
+}
+
+.member_leave_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+/*口コミ投稿一覧*/
+.post_index_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+/*パスワード変更ページ*/
+.password_edit_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+/*口コミ新規*/
+.post_new_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.post_new_item_area {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.post_new_item_image {
+	margin-right: 70px;
+}
+
+/*口コミ新規確認*/
+.post_confirm_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.post_confirm_button {
+	margin-top: 20px;
+}
+
+/*口コミ詳細*/
+.post_show_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.post_show_button {
+	margin-top: 20px;
+	text-align: center;
+}
+
+/*口コミ編集*/
+.post_edit_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.post_edit_item_area {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.post_edit_item_image {
+	margin-right: 70px;
+}
+
+/*食品一覧*/
+.item_index_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.item_index_sidebar {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #99CCFF 50%);
+}
+
+.item_index_genre {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #90EE90 50%);
+}
+
+.item_index_detail {
+	padding: 5px 5px;
+}
+
+.item_index_detail img {
+	width: 100%;
+}
+
+.item_index_button {
+	text-align: center;
+}
+
+
+/*食品詳細*/
+.item_show_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FFCC99 50%);
+}
+
+.item_show_image_area {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.item_show_item_image {
+	margin-right: 70px;
+}
+
+.item_show_sidebar {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #99CCFF 50%);
+}
+
+.item_show_price {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.item_show_price_title {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #FF99CC 50%);
+}
+
+.item_show_new_post_area {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: rgba(255,204,153,0.5);
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.item_show_new_post_area h4 {
+	margin-top: 10px;
+	font-size: 20px;
+}
+
+.item_show_post {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #D9EDF7 50%);
+}
+
+/*ページトップへ戻るボタン作成*/
+#back {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+}
+
+#back img {
+	width: 50px;
 }

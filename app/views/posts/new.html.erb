@@ -1,50 +1,64 @@
-<div>
-	<h3>口コミ投稿</h3>
-</div>
+<div class="row">
+	<div class="col-xs-3"></div>
+	<div class="col-xs-9">
+		<div>
+			<h3 class="post_new_title">口コミ投稿</h3>
+		</div>
 
-<div>
-	<%= image_tag @item.item_image.url %>
-</div>
+		<div class="post_new_item_area">
+			<div class="post_new_item_image">
+				<%= image_tag @item.item_image.url %>
+			</div>
 
-<div>
-	<h4><%= @item.name %></h4>
-	<!-- 価格の平均額表示 -->
-	<h4>
-		現在の相場価格　
-		<% if @market_price_average == nil %>
-			<span>¥　－</span>
-		<% else %>
-			<span>¥　<%= @market_price_average.round %></span>
+			<div>
+				<h4><%= @item.name %></h4>
+				<!-- 価格の平均額表示 -->
+				<h4>
+					現在の相場価格　
+					<% if @market_price_average == nil %>
+						<span>¥　－</span>
+					<% else %>
+						<span>¥　<%= @market_price_average.round %></span>
+					<% end %>
+				</h4>
+				<h4>
+					現在の特売日価格　
+					<% if @sale_price_average == nil %>
+						<span>¥　－</span>
+					<% else %>
+						<span>¥　<%= @sale_price_average.round %></span>
+					<% end %>
+				</h4>
+				<!-- 価格の平均額表示ここまで -->
+			</div>
+		</div>
+
+		<!-- 新規投稿内容 -->
+		<%= form_with(url: posts_new_confirm_path(:member_id => current_member, :item_id => @item.id), method: :post, local: true) do |f| %>
+			<div class="form-group">
+				<%= f.label :price_status, "価格ステータス" %><br>
+				<%= f.collection_radio_buttons :price_status, Post.price_statuses_i18n, :first, :last, checked: "market_price" %>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :price, "価格（半角数字で入力）" %><br>
+				<%= f.text_field :price %>　円
+			</div>
+
+			<div class="form-group">
+				<%= f.label :shop_name, "主な利用店舗名（例：スーパー〇〇　××店）" %><br>
+				<%= f.text_field :shop_name %>
+			</div>
+
+			<div class="form-group">
+				<%= f.label :comment, "コメント（例：「ここのお店、いつも安くておすすめです！」　「●月☆日から特売日だそうです！」）" %><br>
+				<%= f.text_area :comment, size: "55x5" %>
+			</div>
+
+			<div>
+				<%= f.submit "　確認する　", class: "btn btn-success" %>
+			</div>
 		<% end %>
-	</h4>
-	<h4>
-		現在の特売日価格　
-		<% if @sale_price_average == nil %>
-			<span>¥　－</span>
-		<% else %>
-			<span>¥　<%= @sale_price_average.round %></span>
-		<% end %>
-	</h4>
-	<!-- 価格の平均額表示ここまで -->
+		<!-- 新規投稿内容ここまで -->
+	</div>
 </div>
-
-<!-- 新規投稿内容 -->
-<%= form_with(url: posts_new_confirm_path(:member_id => current_member, :item_id => @item.id), method: :post, local: true) do |f| %>
-	<div class="field form-group">
-		<%= f.collection_radio_buttons :price_status, Post.price_statuses_i18n, :first, :last, checked: "market_price" %>
-		<%= f.label :price, "価格（半角数字で入力）" %>
-		<%= f.text_field :price %>　円
-	</div>
-
-	<div>
-		<%= f.label :shop_name, "主な利用店舗名（例：スーパー〇〇　××店）" %>
-		<%= f.text_field :shop_name %>
-		<%= f.label :comment, "コメント（例：「いつもと比べて少し高くなったかも、、、」　「●月☆日から特売日だそうです！」）" %>
-		<%= f.text_area :comment %>
-	</div>
-
-	<div>
-		<%= f.submit "　確認する　" %>
-	</div>
-<% end %>
-<!-- 新規投稿内容ここまで -->

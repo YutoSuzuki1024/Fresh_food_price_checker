@@ -1,120 +1,129 @@
-<div>
-	<h2>　口コミ内容確認　</h2>
+<div class="row">
+	<div class="col-xs-1"></div>
+	<div class="col-xs-11">
+		<div>
+			<h3 class="post_confirm_title">口コミ内容確認</h3>
+			<h4>以下の内容で投稿します。よろしいですか？</h4>
+		</div>
+
+		<div>
+			<table class="table table-bordered">
+				<thead>
+					<tr class="info">
+						<th>商品名</th>
+						<th>価格</th>
+						<th>主な利用店舗名</th>
+						<th>コメント</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<%= image_tag @item.item_image.confirm.url %>
+							<%= @item.name %>
+						</td>
+
+						<td>
+							<% if @post.price_status == "market_price" %>
+								相場価格
+							<% else %>
+								特売日価格
+							<% end %>
+							
+							¥<%= @post.price %>
+						</td>
+
+						<td>
+							<%= @post.shop_name %>
+						</td>
+
+						<td>
+							<%= @post.comment %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 
-<div>
-	<h4>以下の内容で投稿します。よろしいですか？</h4>
+		<!-- 地図表示 -->
+<div class="row">
+	<div class="col-xs-3"></div>
+	<div class="col-xs-9">
+		<div>
+			<h4>主な利用店舗　地図</h4>
+		</div>
+
+		<div id="map"></div>
+
+		<style>
+			#map{
+				height: 350px;
+				width: 600px;
+			}
+		</style>
+
+		<script type="text/javascript">
+			var map;
+			var service;
+			var infowindow;
+
+			function initMap() {
+			  var sydney = new google.maps.LatLng(-33.867, 151.195);
+			  infowindow = new google.maps.InfoWindow();
+			  map = new google.maps.Map(document.getElementById("map"), {
+			    center: sydney,
+			    zoom: 15,
+			  });
+			  var request = {
+			    query: "<%= @post.shop_name %>",
+			    fields: ["name", "geometry"],
+			  };
+			  service = new google.maps.places.PlacesService(map);
+			  service.findPlaceFromQuery(request, (results, status) => {
+			    if (status === google.maps.places.PlacesServiceStatus.OK) {
+			      for (let i = 0; i < results.length; i++) {
+			        createMarker(results[i]);
+			      }
+			      map.setCenter(results[0].geometry.location);
+			    }
+			  });
+			}
+
+			function createMarker(place) {
+			  var marker = new google.maps.Marker({
+			    map,
+			    position: place.geometry.location,
+			  });
+			  google.maps.event.addListener(marker, "click", () => {
+			    infowindow.setContent(place.name);
+			    infowindow.open(map);
+			  });
+			}
+		</script>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&libraries=places&callback=initMap">
+		</script>
+		<!-- 地図表示ここまで -->
+	</div>
 </div>
 
+<div class="row">
+	<div class="col-xs-5"></div>
+	<div class="col-xs-7">
+		<div class="post_confirm_button">
+			<!-- 新規投稿内容 -->
+			<%= form_with(model: @post, url: posts_create_path(:member_id => current_member, :item_id => @item.id), method: :post, local: true) do |f| %>
+				<%= f.hidden_field :price_status %>
+				<%= f.hidden_field :price %>
+				<%= f.hidden_field :shop_name %>
+				<%= f.hidden_field :comment %>
 
-<div>
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>商品名</th>
-				<th>価格</th>
-				<th>主な利用店舗名</th>
-				<th>コメント</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<%= image_tag @item.item_image.confirm.url %>
-					<%= @item.name %>
-				</td>
-
-				<td>
-					<% if @post.price_status == "market_price" %>
-						相場価格
-					<% else %>
-						特売日価格
-					<% end %>
-					
-					¥<%= @post.price %>
-				</td>
-
-				<td>
-					<%= @post.shop_name %>
-				</td>
-
-				<td>
-					<%= @post.comment %>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
-
-<!-- 地図表示 -->
-<div>
-	主な利用店舗　地図
-</div>
-
-<div id="map"></div>
-
-<style>
-	#map{
-		height: 350px;
-		width: 600px;
-	}
-</style>
-
-<script type="text/javascript">
-	var map;
-	var service;
-	var infowindow;
-
-	function initMap() {
-	  var sydney = new google.maps.LatLng(-33.867, 151.195);
-	  infowindow = new google.maps.InfoWindow();
-	  map = new google.maps.Map(document.getElementById("map"), {
-	    center: sydney,
-	    zoom: 15,
-	  });
-	  var request = {
-	    query: "<%= @post.shop_name %>",
-	    fields: ["name", "geometry"],
-	  };
-	  service = new google.maps.places.PlacesService(map);
-	  service.findPlaceFromQuery(request, (results, status) => {
-	    if (status === google.maps.places.PlacesServiceStatus.OK) {
-	      for (let i = 0; i < results.length; i++) {
-	        createMarker(results[i]);
-	      }
-	      map.setCenter(results[0].geometry.location);
-	    }
-	  });
-	}
-
-	function createMarker(place) {
-	  var marker = new google.maps.Marker({
-	    map,
-	    position: place.geometry.location,
-	  });
-	  google.maps.event.addListener(marker, "click", () => {
-	    infowindow.setContent(place.name);
-	    infowindow.open(map);
-	  });
-	}
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&libraries=places&callback=initMap">
-</script>
-<!-- 地図表示ここまで -->
-
-<div>
-	<!-- 新規投稿内容 -->
-	<%= form_with(model: @post, url: posts_create_path(:member_id => current_member, :item_id => @item.id), method: :post, local: true) do |f| %>
-		<%= f.hidden_field :price_status %>
-		<%= f.hidden_field :price %>
-		<%= f.hidden_field :shop_name %>
-		<%= f.hidden_field :comment %>
-
-		<%= f.submit "　投稿する　", class: "btn btn-primary" %>
-	<% end %>
-	<!-- 新規投稿内容ここまで -->
-
-	<%= link_to "　戻る　", posts_new_path(:member_id => current_member.id, :item_id => @item.id), class: "btn btn-danger" %>
+				<%= f.submit "　投稿する　", class: "btn btn-primary" %>
+				<%= link_to "　戻る　", posts_new_path(:member_id => current_member.id, :item_id => @item.id), class: "btn btn-danger" %>
+			<% end %>
+			<!-- 新規投稿内容ここまで -->
+		</div>
+	</div>
 </div>

@@ -16,3 +16,15 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+document.addEventListener("turbolinks:load"
+, function () {
+	$(function() {
+		$('#back a').on('click', function(event){
+			$('body, html').animate({
+				scrollTop: 0
+			}, 800);
+			event.preventDefault();
+		});
+	});
+})

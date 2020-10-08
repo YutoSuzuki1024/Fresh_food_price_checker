@@ -1,43 +1,50 @@
-<div>
-	<h2>マイページ</h2>
-</div>
+<div class="row">
+	<div class="col-xs-3"></div>
+	<div class="col-xs-9">
+		<%= flash[:notice] %>
+		<div>
+			<h3 class="member_show_title">マイページ</h3>
+		</div>
 
 
-<div>
-	<h3>登録情報</h3>
-	<%= link_to "　編集する　", edit_member_path(current_member), class: "btn btn-primary" %>
-	<%= link_to "　パスワードを変更する　", edit_member_registration_path, class: "btn btn-primary" %>
-</div>
+		<div>
+			<h4>登録情報</h4>
+			<%= link_to "　編集する　", edit_member_path(current_member), class: "btn btn-primary" %>
+			<%= link_to "　パスワードを変更する　", edit_member_registration_path, class: "btn btn-primary" %>
+		</div>
 
-<!-- 会員情報一覧 -->
-<div>
-	<table class="table table-bordered">
-		<tbody>
-			<tr>
-				<td class="action">名前 or ニックネーム</td>
-				<td><%= @member.name %></td>
-			</tr>
-			<tr>
-				<td class="action">メールアドレス</td>
-				<td><%= @member.email %></td>
-			</tr>
-			<tr>
-				<td class="action">性別</td>
-				<td><%= @member.sex_i18n %></td>
-			</tr>
-			<tr>
-				<td class="action">年齢</td>
-				<td><%= @member.age_i18n %></td>
-			</tr>
-			<tr>
-				<td class="action">お住まいの地域</td>
-				<td><%= @area.name %></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<!-- 会員情報一覧ここまで -->
+		<!-- 会員情報一覧 -->
+		<div>
+			<table class="table table-bordered member_show_table">
+				<tbody>
+					<tr>
+						<td class="action">名前 or ニックネーム</td>
+						<td><%= @member.name %></td>
+					</tr>
+					<tr>
+						<td class="action">メールアドレス</td>
+						<td><%= @member.email %></td>
+					</tr>
+					<tr>
+						<td class="action">性別</td>
+						<td><%= @member.sex_i18n %></td>
+					</tr>
+					<tr>
+						<td class="action">年齢</td>
+						<td><%= @member.age_i18n %></td>
+					</tr>
+					<tr>
+						<td class="action">お住まいの地域</td>
+						<td><%= @area.name %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- 会員情報一覧ここまで -->
 
-<div>
-	<%= link_to "投稿内容一覧を見る", posts_index_path(current_member), class: "btn btn-primary" %>
+		<div>
+			<h4>投稿一覧</h4>
+			<%= link_to "投稿内容一覧を見る", posts_index_path(current_member), class: "btn btn-primary" %>
+		</div>
+	</div>
 </div>

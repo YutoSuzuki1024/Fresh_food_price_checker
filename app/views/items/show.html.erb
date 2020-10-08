@@ -1,97 +1,112 @@
-<!-- サイドバー -->
-<div>
-	<h3>他の地域も見てみる！</h3>
+<%= flash[:success] %>
 
-	<ul class="list-group">
-		<% @areas.each do |area| %>
-			<li class="list-group-item">
-				<%= link_to items_path(:area_id => area.id) do %>
-					<%= area.name %>
-				<% end %>
-			</li>
-		<% end %>
-	</ul>
-</div>
-<!-- サイドバーここまで -->
+<div class="row">
+	<!-- サイドバー -->
+	<div class="col-xs-2">
+		<h3 class="item_show_sidebar">ほかの地域</h3>
 
-<div>
-	<%= image_tag @item.item_image.detail.url %>
-</div>
-
-<div>
-	<h3><%= @item.name %></h3>
-	<h3>相場価格</h3>
-	<% if @market_price_average == nil %>
-		<span>¥　－</span>
-	<% else %>
-		<span>¥　<%= @market_price_average.round %></span>
-	<% end %>
-
-	<h3>特売日価格</h3>
-	<% if @sale_price_average == nil %>
-		<span>¥　－</span>
-	<% else %>
-		<span>¥　<%= @sale_price_average.round %></span>
-	<% end %>
-</div>
-
-<div>
-	<p>
-		一番相場価格がお得な店舗　
-		<% if @market_price_minimum == nil %>
-			ー
-		<% else %>
-			<%= @market_price_minimum.shop_name %>
-		<% end %>
-	</p>
-
-	<p>
-		一番特売日価格がお得な店舗　
-		<% if @sale_price_minimum == nil %>
-			ー
-		<% else %>
-			<%= @sale_price_minimum.shop_name %>
-		<% end %>
-	</p>
-</div>
-
-<div>
-	<h4>あなたも口コミを投稿してみませんか？</h4>
-	<%= link_to "　投稿する　", posts_new_path(:member_id => current_member.id, :item_id => @item.id), class: "btn btn-primary" %>
-</div>
-
-<div>
-	<h3>みんなの口コミ</h3>
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>投稿日時</th>
-				<th>価格ステータス</th>
-				<th>価格</th>
-				<th>コメント</th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @posts.each do |post| %>
-				<tr>
-					<td><%= post.updated_at.to_s(:datetime_jp) %></td>
-					<td><%= post.price_status_i18n %></td>
-					<td>¥　<%= post.price %></td>
-					<td>
-						<%= post.comment %><br>
-						主な利用店舗：　<%= post.shop_name %>
-					</td>
-					<td>
-						<%= @member.age_i18n %>
-						<%= @member.sex_i18n %>
-					</td>
-					<td>いいねボタン</td>
-					<td><%= link_to "　詳細をみる　", posts_show_path(:member_id => @member, :item_id => @item, :id => post.id), class: "btn btn-primary" %></td>
-				</tr>
+		<ul class="list-group">
+			<% @areas.each do |area| %>
+				<li class="list-group-item">
+					<%= link_to items_path(:area_id => area.id) do %>
+						<%= area.name %>
+					<% end %>
+				</li>
 			<% end %>
-		</tbody>
-	</table>
+		</ul>
+	</div>
+	<!-- サイドバーここまで -->
+
+	<div class="col-xs-10">
+		<div>
+			<h2 class="item_show_title">商品詳細</h2>
+		</div>
+
+		<div class="item_show_image_area">
+			<div class="item_show_item_image">
+				<%= image_tag @item.item_image.detail.url %>
+			</div>
+
+			<div>
+				<h3><%= @item.name %></h3>
+			</div>
+		</div>
+
+		<div class="item_show_price">
+			<h4 class="item_show_price_title">相場価格</h4>
+			<% if @market_price_average == nil %>
+				<h4>¥　－</h4>
+			<% else %>
+				<h4>¥　<%= @market_price_average.round %></h4>
+			<% end %>
+
+			<h4>
+				一番相場価格がお得な店舗：
+				<% if @market_price_minimum == nil %>
+					ー
+				<% else %>
+					<%= @market_price_minimum.shop_name %>
+				<% end %>
+			</h4>
+		</div>
+
+		<div class="item_show_price">
+			<h4 class="item_show_price_title">特売日価格</h4>
+			<% if @sale_price_average == nil %>
+				<h4>¥　－</h4>
+			<% else %>
+				<h4>¥　<%= @sale_price_average.round %></h4>
+			<% end %>
+
+			<h4>
+				一番特売日価格がお得な店舗：
+				<% if @sale_price_minimum == nil %>
+					ー
+				<% else %>
+					<%= @sale_price_minimum.shop_name %>
+				<% end %>
+			</h4>
+		</div>
+
+		<div class="item_show_new_post_area">
+			<h4>あなたも口コミを投稿してみませんか？</h4>
+			<div>
+				<%= link_to "　投稿する　", posts_new_path(:member_id => current_member.id, :item_id => @item.id), class: "btn btn-primary" %>
+			</div>
+		</div>
+
+		<div>
+			<h3 class="item_show_post">みんなの口コミ</h3>
+			<table class="table table-bordered">
+				<thead>
+					<tr class="info">
+						<th>投稿日時</th>
+						<th>価格ステータス</th>
+						<th>価格</th>
+						<th>コメント</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @posts.each do |post| %>
+						<tr>
+							<td><%= post.updated_at.to_s(:datetime_jp) %></td>
+							<td><%= post.price_status_i18n %></td>
+							<td>¥　<%= post.price %></td>
+							<td>
+								<%= post.comment %><br>
+								主な利用店舗：　<%= post.shop_name %>
+							</td>
+							<td>
+								<%= @member.age_i18n %>
+								<%= @member.sex_i18n %>
+							</td>
+							<td><%= link_to "　詳細をみる　", posts_show_path(:member_id => @member, :item_id => @item, :id => post.id), class: "btn btn-primary" %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

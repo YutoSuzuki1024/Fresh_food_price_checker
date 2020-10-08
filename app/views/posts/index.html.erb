@@ -1,18 +1,17 @@
 <div>
-	<h4>口コミ投稿一覧</h4>
+	<h3 class="post_index_title">口コミ投稿一覧</h3>
 </div>
 
 <div>
 	<table class="table table-bordered">
 		<thead>
-			<tr>
+			<tr class="info">
 				<th>投稿日時</th>
 				<th>地域</th>
 				<th>商品名</th>
 				<th>価格ステータス</th>
 				<th>価格</th>
 				<th>コメント</th>
-				<th></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -26,12 +25,11 @@
 						<%= post.item.name %>
 					</td>
 					<td><%= post.price_status_i18n %></td>
-					<td>¥　<%= post.price %></td>
+					<td>¥ <%= post.price %></td>
 					<td>
 						<%= post.comment %><br>
-						主な利用店舗：　<%= post.shop_name %>
+						主な利用店舗： <%= post.shop_name %>
 					</td>
-					<td>いいねボタン</td>
 					<td>
 						<%= link_to "　編集する　", posts_edit_path(:member_id => current_member, :item_id => post.item_id, :id => post.id), class: "btn btn-success" %>
 						<%= link_to "　削除する　", posts_destroy_path(post.id), method: :delete, data: {confirm: " 本当に削除してもよろしいですか？"}, class: "btn btn-danger" %>
