@@ -16,7 +16,6 @@ class ItemsController < ApplicationController
   def show
   	@item = Item.find(params[:id])
   	@posts = Post.where(item_id: params[:id]).order(updated_at: "DESC")
-  	@member = Member.find(current_member.id)
   	@areas = Area.where(is_deleted: false)
 
   	#口コミから、相場価格と特売日価格の平均値をそれぞれ算出

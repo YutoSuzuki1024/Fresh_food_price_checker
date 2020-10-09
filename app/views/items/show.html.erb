@@ -69,7 +69,12 @@
 		</div>
 
 		<div class="item_show_new_post_area">
-			<h4>あなたも口コミを投稿してみませんか？</h4>
+			<% if @posts == [] %>
+				<h4>最初の口コミを投稿してみませんか？</h4>
+			<% else %>
+				<h4>あなたも口コミを投稿してみませんか？</h4>
+			<% end %>
+
 			<div>
 				<%= link_to "　投稿する　", posts_new_path(:member_id => current_member.id, :item_id => @item.id), class: "btn btn-primary" %>
 			</div>
@@ -77,36 +82,40 @@
 
 		<div>
 			<h3 class="item_show_post">みんなの口コミ</h3>
-			<table class="table table-bordered">
-				<thead>
-					<tr class="info">
-						<th>投稿日時</th>
-						<th>価格ステータス</th>
-						<th>価格</th>
-						<th>コメント</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<% @posts.each do |post| %>
-						<tr>
-							<td><%= post.updated_at.to_s(:datetime_jp) %></td>
-							<td><%= post.price_status_i18n %></td>
-							<td>¥　<%= post.price %></td>
-							<td>
-								<%= post.comment %><br>
-								主な利用店舗：　<%= post.shop_name %>
-							</td>
-							<td>
-								<%= @member.age_i18n %>
-								<%= @member.sex_i18n %>
-							</td>
-							<td><%= link_to "　詳細をみる　", posts_show_path(:member_id => @member, :item_id => @item, :id => post.id), class: "btn btn-primary" %></td>
+			<% if @posts == [] %>
+				<h4>口コミはまだありません。</h4>
+			<% else %>
+				<table class="table table-bordered">
+					<thead>
+						<tr class="info">
+							<th>投稿日時</th>
+							<th>価格ステータス</th>
+							<th>価格</th>
+							<th>コメント</th>
+							<th></th>
+							<th></th>
 						</tr>
-					<% end %>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<% @posts.each do |post| %>
+							<tr>
+								<td><%= post.updated_at.to_s(:datetime_jp) %></td>
+								<td><%= post.price_status_i18n %></td>
+								<td>¥　<%= post.price %></td>
+								<td>
+									<%= post.comment %><br>
+									主な利用店舗：　<%= post.shop_name %>
+								</td>
+								<td>
+									<%= post.member.age_i18n %>
+									<%= post.member.sex_i18n %>
+								</td>
+								<td><%= link_to "　詳細をみる　", posts_show_path(:member_id => current_member, :item_id => @item, :id => post.id), class: "btn btn-primary" %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			<% end %>
 		</div>
 	</div>
 </div>

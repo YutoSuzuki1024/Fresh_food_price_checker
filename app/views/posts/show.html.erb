@@ -14,7 +14,6 @@
 						<th>価格</th>
 						<th>コメント</th>
 						<th></th>
-						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,10 +32,9 @@
 								主な利用店舗：　<%= @post.shop_name %>
 							</td>
 							<td>
-								<%= @member.age_i18n %>
-								<%= @member.sex_i18n %>
+								<%= @post.member.age_i18n %>
+								<%= @post.member.sex_i18n %>
 							</td>
-							<td>いいねボタン</td>
 						</tr>
 				</tbody>
 			</table>
