@@ -371,6 +371,11 @@ form input[type=text], form input[type=email], form input[type=password] {
 	background: linear-gradient(transparent 70%, #D9EDF7 50%);
 }
 
+.item_show_pickup_post {
+	display: inline-block;
+	background: linear-gradient(transparent 70%, #DFF0D8 50%);
+}
+
 /*ページトップへ戻るボタン作成*/
 #back {
 	position: fixed;
