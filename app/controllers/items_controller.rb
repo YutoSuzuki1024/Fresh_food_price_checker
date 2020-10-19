@@ -18,6 +18,9 @@ class ItemsController < ApplicationController
   	@posts = Post.where(item_id: params[:id]).order(updated_at: "DESC")
   	@areas = Area.where(is_deleted: false)
 
+    #Google Cloud Natural Languageによる判定の結果、最もスコアが高かったものを抽出
+    @post = Post.where(item_id: params[:id]).order(score: "DESC").first
+
   	#口コミから、相場価格と特売日価格の平均値をそれぞれ算出
   	@market_price_average = Post.where(price_status: 1, item_id: params[:id]).average(:price)
   	@sale_price_average = Post.where(price_status: 0, item_id: params[:id]).average(:price)

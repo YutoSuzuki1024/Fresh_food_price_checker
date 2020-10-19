@@ -32,6 +32,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     @post.item_id = params[:item_id]
+    @post.score = Language.get_data(post_params[:comment])
     if @post.save
       flash[:success] = "口コミのご協力、ありがとうございます！"
       redirect_to item_path(params[:item_id])
@@ -54,7 +55,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.member_id = params[:member_id]
     @post.item_id = params[:item_id]
-
+    @post.score = Language.get_data(post_params[:comment])
+    
     if @post.update(post_params)
       flash[:success] = "編集が完了しました！"
       redirect_to posts_index_path(current_member.id)
