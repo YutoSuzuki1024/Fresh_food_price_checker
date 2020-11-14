@@ -2,14 +2,14 @@ class ItemsController < ApplicationController
 	before_action :authenticate_member!
 
   def index
+    return redirect_to root_path, flash: {error: "地域を選択してください！"} if params[:area_id].blank?
   	# ユーザーに選択された地域に登録されている食品一覧を出す
     @items = Item.where(area_id: params[:area_id])
   	@vegetables = @items.where(genre_id: 1)
   	@fruits = @items.where(genre_id: 2)
   	@seafoods = @items.where(genre_id: 3)
   	@meats = @items.where(genre_id: 4)
-
-  	@area = Area.find(params[:area_id])
+    @area = Area.find(params[:area_id])
   	@areas = Area.where(is_deleted: false)
   end
 

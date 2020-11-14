@@ -33,6 +33,12 @@ class PostsController < ApplicationController
     @post.member_id = current_member.id
     @post.item_id = params[:item_id]
     @post.score = Language.get_data(post_params[:comment])
+
+    #render 'posts/new'用に記載
+    @item = Item.find(params[:item_id])
+    @market_price_average = Post.where(price_status: 1, item_id: params[:item_id]).average(:price)
+    @sale_price_average = Post.where(price_status: 0, item_id: params[:item_id]).average(:price)
+
     if @post.save
       flash[:success] = "口コミのご協力、ありがとうございます！"
       redirect_to item_path(params[:item_id])

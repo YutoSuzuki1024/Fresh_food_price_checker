@@ -69,7 +69,7 @@
 		</div>
 
 		<div class="item_show_new_post_area">
-			<% if @posts == [] %>
+			<% if @posts.blank? %>
 				<h4>最初の口コミを投稿してみませんか？</h4>
 			<% else %>
 				<h4>あなたも口コミを投稿してみませんか？</h4>
@@ -81,7 +81,7 @@
 		</div>
 
 		<div>
-			<% if @post == [] %>
+			<% if @post.blank? %>
 			<% else %>
 				<h3 class="item_show_pickup_post">ピックアップ口コミ</h3>
 				<table class="table table-bordered">
@@ -115,12 +115,9 @@
 			<% end %>
 		</div>
 
-
-
-
 		<div>
 			<h3 class="item_show_post">みんなの口コミ</h3>
-			<% if @posts == [] %>
+			<% if @posts.blank? %>
 				<h4>口コミはまだありません。</h4>
 			<% else %>
 				<table class="table table-bordered">
